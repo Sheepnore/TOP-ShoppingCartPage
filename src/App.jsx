@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react";
+import "./App.css";
+import { Link } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const getData = async function () {
+      const data = await fetch("https://fakestoreapi.com/products?limit=5")
+        .then((res) => res.json())
+        .then((json) => json);
+      console.log(data);
+    };
+    getData();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="navbar">
+        <Link to="/" className="links">
+          Home
+        </Link>
+        <Link to="cart" className="links">
+          Checkout
+        </Link>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="home">
+        <div className="intro grid-container">
+          <div className="text-sec">
+            <h1>Welcome, Love. This is Wox.</h1>
+            <p>
+              Browse through to discover more, maybe you would find something
+              you like
+            </p>
+          </div>
+          <div className="img-sec">
+            <img src="" alt="" />
+          </div>
+        </div>
+        <div className="product-info">List of all products here</div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
