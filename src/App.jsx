@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
+import Product from "./Product";
 
 function App() {
+  const [productData, setProductData] = useState([]);
+
   useEffect(() => {
-    const getData = async function () {
+    async function getData() {
       const data = await fetch("https://fakestoreapi.com/products?limit=5")
         .then((res) => res.json())
         .then((json) => json);
+      setProductData(data);
       console.log(data);
-    };
+    }
     getData();
   }, []);
 
@@ -36,7 +40,15 @@ function App() {
             <img src="" alt="" />
           </div>
         </div>
-        <div className="product-info">List of all products here</div>
+        <div className="products-container">
+          {productData.map((item) => (
+            <Product
+              id={item.id}
+              image={item.image}
+              title={item.title}
+            ></Product>
+          ))}
+        </div>
       </div>
     </>
   );
