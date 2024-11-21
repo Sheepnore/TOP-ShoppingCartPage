@@ -4,15 +4,22 @@ import { CartContext } from "./CartProvider";
 export default function Cart() {
   const { productData, cart } = useContext(CartContext);
   const [items, setItems] = useState([]);
-  useEffect(() => {
-    productData.map((product) => {
-      cart.map((cartItem) => {
-        if (product.id === cartItem.id) {
-          setItems([...items, product]);
-        }
-      });
+
+  const findMatchingProduct = (data, cartItm) => {
+    let match = false;
+    data.map((product) => {
+      if (product.id === cartItm.id) {
+        match = true;
+      }
     });
-    console.log(items);
+    return match;
+  };
+
+  useEffect(() => {
+    const result = productData.filter((product) =>
+      findMatchingProduct(cart, product)
+    );
+    setItems(result);
   }, []);
 
   return (
