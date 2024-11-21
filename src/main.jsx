@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import Cart from "./Cart.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CartProvider from "./CartProvider.jsx";
 
 const routes = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -12,6 +13,8 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={routes}></RouterProvider>
+    <CartProvider>
+      <RouterProvider router={routes} />
+    </CartProvider>
   </StrictMode>
 );

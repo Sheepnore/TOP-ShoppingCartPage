@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
 import "./App.css";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./CartProvider";
 import Product from "./Product";
+import Cart from "./Cart";
+import AddedDialog from "./AddedDialog";
 
 function App() {
-  const [productData, setProductData] = useState([]);
+  const { cart, setCart, productData } = useContext(CartContext);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    async function getData() {
-      const data = await fetch("https://fakestoreapi.com/products?limit=5")
-        .then((res) => res.json())
-        .then((json) => json);
-      setProductData(data);
-      console.log(data);
-    }
-    getData();
-  }, []);
+  // display quantities in cart
+  let quantity = 0;
+  cart.map((item) => {
+    quantity += item.quantity;
+  });
 
   return (
     <>
@@ -26,6 +25,7 @@ function App() {
         <Link to="cart" className="links">
           Checkout
         </Link>
+        <span className="cartQuan">Items: {quantity}</span>
       </div>
       <div className="home">
         <div className="intro grid-container">
@@ -43,13 +43,17 @@ function App() {
         <div className="products-container">
           {productData.map((item) => (
             <Product
+              key={item.id}
               id={item.id}
               image={item.image}
               title={item.title}
+              price={item.price}
+              setOpen={setOpen}
             ></Product>
           ))}
         </div>
       </div>
+      <AddedDialog dialogOpen={open} setDialogOpen={setOpen}></AddedDialog>
     </>
   );
 }
