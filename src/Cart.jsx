@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartProvider";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { productData, cart } = useContext(CartContext);
@@ -24,6 +25,9 @@ export default function Cart() {
 
   return (
     <>
+      <Link to="/" className="links">
+        Home
+      </Link>
       {items.map((itm) => {
         return (
           <div className="cartItem" key={itm.id}>
