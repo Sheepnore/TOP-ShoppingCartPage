@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartProvider";
 import { Link } from "react-router-dom";
 
-export default function Cart() {
+export default function Checkout() {
   const { productData, cart } = useContext(CartContext);
   const [items, setItems] = useState([]);
 
@@ -23,21 +23,33 @@ export default function Cart() {
     setItems(result);
   }, []);
 
+  let IsCartEmpty = false;
+  if (items.length === 0) {
+    IsCartEmpty = true;
+  }
+
   return (
     <>
       <Link to="/" className="links">
         Home
       </Link>
-      {items.map((itm) => {
-        return (
-          <div className="cartItem" key={itm.id}>
-            <div className="cartItem-title">{itm.title}</div>
-            <div className="cartitem-img">
-              <img src={itm.image} alt={itm.title} />
-            </div>
-          </div>
-        );
-      })}
+      <div className="cartItems">
+        {IsCartEmpty ? (
+          <div>Currently no item is in the cart. Click 'Home' to return</div>
+        ) : (
+          items.map((item) => {
+            return (
+              <div className="cartItem" key={item.id}>
+                <div className="cartItem-title">{item.title}</div>
+                <div className="cartitem-img">
+                  <img src={item.image} alt={item.title} />
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+      <div></div>
     </>
   );
 }

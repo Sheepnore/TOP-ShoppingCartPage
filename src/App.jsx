@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartProvider";
 import Product from "./Product";
-import Cart from "./Cart";
 import AddedDialog from "./AddedDialog";
 
 function App() {
@@ -22,10 +21,10 @@ function App() {
         <Link to="/" className="links">
           Home
         </Link>
-        <Link to="cart" className="links">
+        <Link to="checkout" className="links">
           Checkout
         </Link>
-        <span className="cartQuan">Items: {quantity}</span>
+        <span className="cartQuantity">Items: {quantity}</span>
       </div>
       <div className="home">
         <div className="intro grid-container">
