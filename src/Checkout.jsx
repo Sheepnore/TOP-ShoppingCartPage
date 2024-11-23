@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartProvider";
 import { Link } from "react-router-dom";
-
+import "./Checkout.css";
 export default function Checkout() {
   const { productData, cart } = useContext(CartContext);
   const [items, setItems] = useState([]);
@@ -29,13 +29,15 @@ export default function Checkout() {
   }
 
   return (
-    <>
+    <div className="product-container">
       <Link to="/" className="links">
         Home
       </Link>
       <div className="cartItems">
         {IsCartEmpty ? (
-          <div>Currently no item is in the cart. Click 'Home' to return</div>
+          <div className="emptycart-message">
+            Currently no item is in the cart. Click 'Home' to return
+          </div>
         ) : (
           items.map((item) => {
             return (
@@ -49,7 +51,7 @@ export default function Checkout() {
           })
         )}
       </div>
-      <div></div>
-    </>
+      <div className="price-details"></div>
+    </div>
   );
 }
