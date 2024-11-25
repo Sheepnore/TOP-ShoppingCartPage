@@ -18,13 +18,12 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <Link to="/" className="links">
+        <Link to="/" className="links" id="home-link">
           Home
         </Link>
-        <Link to="checkout" className="links">
-          Checkout
+        <Link to="checkout" className="links" id="checkout-link">
+          Checkout {`(${quantity})`}
         </Link>
-        <span className="cartQuantity">Items: {quantity}</span>
       </div>
       <div className="home">
         <div className="intro grid-container">
@@ -35,9 +34,9 @@ function App() {
               you like
             </p>
           </div>
-          <div className="img-sec">
+          {/* <div className="img-sec">
             <img src="" alt="" />
-          </div>
+          </div> */}
         </div>
         <div className="products-container">
           {productData.map((item) => (

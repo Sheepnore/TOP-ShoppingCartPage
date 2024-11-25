@@ -39,54 +39,66 @@ export default function Checkout() {
   }
 
   return (
-    <div className="product-container">
-      <Link to="/" className="links">
-        Home
-      </Link>
-      <div className="cartItems">
-        {IsCartEmpty ? (
-          <div className="emptycart-message">
-            Currently no item is in the cart. Click 'Home' to return
-          </div>
-        ) : (
-          items.map((item) => {
-            return (
-              <div className="cartItem" key={item.id}>
-                <div className="cartItem-title">{item.title}</div>
-                <div className="cartItem-img">
-                  <img src={item.image} alt={item.title} />
+    <>
+      <div className="navbar">
+        <Link to="/" className="links" id="checkout-home-link">
+          Home
+        </Link>
+      </div>
+      <div className="product-container">
+        <div className="cartItems">
+          {IsCartEmpty ? (
+            <div className="emptycart-message">
+              Currently no item is in the cart. Click 'Home' to return
+            </div>
+          ) : (
+            items.map((item) => {
+              return (
+                <div className="cartItem" key={item.id}>
+                  <div className="cartItem-title">{item.title}</div>
+                  <div className="cartItem-img">
+                    <img src={item.image} alt={item.title} />
+                  </div>
                 </div>
+              );
+            })
+          )}
+        </div>
+        {IsCartEmpty ? null : (
+          <div className="checkout-sec">
+            <div className="title">{`Checkout (${items.length}):`}</div>
+            <div className="checkout-detail">
+              <ul>
+                {items.map((itm) => {
+                  return (
+                    <li className="cartItem-detail" key={itm.id}>{`${
+                      itm.title
+                    } * ${itm.quantity} = $${singleItemTotal(
+                      itm.price,
+                      itm.quantity
+                    )}`}</li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="checkout-total">
+              <div className="title">Total:</div>
+              <div className="price-total">
+                $
+                {items
+                  .reduce((accu, curr) => {
+                    const currentTotal = singleItemTotal(
+                      curr.price,
+                      curr.quantity
+                    );
+                    return accu + currentTotal;
+                  }, 0)
+                  .toFixed(2)}
               </div>
-            );
-          })
+            </div>
+          </div>
         )}
       </div>
-      <div className="checkout-sec">
-        <div className="title">{`Checkout (${items.length}):`}</div>
-        <div className="checkout-detail">
-          <ul>
-            {items.map((itm) => {
-              return (
-                <li className="cartItem-detail" key={itm.id}>{`${itm.title} * ${
-                  itm.quantity
-                }: $${singleItemTotal(itm.price, itm.quantity)}`}</li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="checkout-total">
-          <div className="title">Total:</div>
-          <div className="price-total">
-            $
-            {items
-              .reduce((accu, curr) => {
-                const currentTotal = singleItemTotal(curr.price, curr.quantity);
-                return accu + currentTotal;
-              }, 0)
-              .toFixed(2)}
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
