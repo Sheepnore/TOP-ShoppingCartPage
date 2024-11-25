@@ -32,10 +32,8 @@ export default function Product({ id, image, title, price, setOpen }) {
       });
       setCart(modified);
     }
-    console.log(isInCart);
   };
 
-  console.log(cart);
   return (
     <div className="product-card" key={id}>
       <div className="productImage">
