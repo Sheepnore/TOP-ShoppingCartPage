@@ -6,7 +6,7 @@ export default function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   useEffect(() => {
     async function getData() {
-      const data = await fetch("https://fakestoreapi.com/products?limit=10")
+      const data = await fetch("https://fakestoreapi.com/products?limit=30")
         .then((res) => res.json())
         .then((json) => json);
       setProductData(data);

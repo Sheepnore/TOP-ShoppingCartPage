@@ -40,11 +40,6 @@ export default function Checkout() {
 
   return (
     <>
-      <div className="navbar">
-        <Link to="/" className="links" id="checkout-home-link">
-          Home
-        </Link>
-      </div>
       <div className="product-container">
         <div className="cartItems">
           {IsCartEmpty ? (

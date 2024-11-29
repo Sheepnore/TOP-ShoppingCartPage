@@ -4,53 +4,81 @@ body{
 }
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
-  background-color: antiquewhite;
-  position: relative;
-  height: 100vh;
-}
-#home-link::before{
-  content: url('./assets/home.svg');
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-}
-#checkout-link::before{
-  content: url('./assets/cart.svg');
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
 }
 
-.navbar{
-  background-color: rgb(255, 225, 185);
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-}
-.navbar *{
-  margin-right: 1rem;
-  font-size: 1.1rem;
-  color: rgba(67, 37, 18, 0.9);
-  text-decoration: none;
-  padding: 1rem 0 1rem 1rem;
+/* reuseable global styles */
+.call-to-action-btn{
+  border: none;
+  border-radius: 24px;
+  box-shadow: 1px 1px 1px gray;
+  font-family: "Gill Sans", sans-serif;
+  font-size: 1.2rem;
+  padding: 1rem 1.2rem;
+  background-color: rgb(32, 68, 99);
+  color: #fff;
+  cursor: pointer;
   transition: 300ms ease;
 }
-.navbar .links{
-  font-size: 1.3rem;
+.call-to-action-btn:hover{
+  transform: scale(1.1);
+  transition: 300ms ease;
+  opacity: .8;
 }
-.navbar .links:hover{
+
+
+/* navbar */
+nav.navbar{
+  padding: 0;
+  margin-inline: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+nav.navbar .navbar-right{
+  display: flex;
+  place-content: center;
+}
+nav.navbar #trademark-link{
+  font-size: 2.5rem;
+  color: black;
+}
+nav.navbar .links {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 1rem;
+  text-decoration: none;
+}
+.navbar .links .cart-svg{
+  margin-top: 8px;
+  margin-right: 10px;
+  background-image: url('./assets/cart.svg');
+  width: 32px;
+  height: 32px;
+}
+nav.navbar .hover-links{
+  transition: 300ms ease;
+}
+nav.navbar .hover-links:hover{
   opacity: .5;
   transform: scale(1.1);
   transition: 300ms ease;
 }
-.home{
-  padding: 0 1.5rem;
+
+
+/* header */
+header.header{
+  margin-bottom: 4rem;
 }
+.text-section *{
+  margin-bottom: 3rem;
+}
+main.home{
+  padding: 0 2rem;
+}
+
+
 .products-container{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -69,9 +97,11 @@ body{
 .product-card form .priceTag{
   color: rgb(31, 65, 65);
 }
-
 .productImage .img{
   max-width: 10rem;
   height: 10rem;
   opacity: .9;
+}
+.copyright-footer{
+  margin: 2rem 0;
 }
